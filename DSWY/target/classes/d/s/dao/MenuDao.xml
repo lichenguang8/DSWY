@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="d.s.dao.MenuDao">
+	<sql id="my_sql">
+		select menu_id,menu_name,menu_url,menu_state,menu_remark,top_id,menu_paixu
+		from menu_tb
+	</sql>
+	<resultMap type="d.s.domain.MenuBean" id="menu">
+		<id property="menuId" column="menu_id"/>
+		<result property="menuName" column="menu_name"/>
+		<result property="menuUrl" column="menu_url"></result>
+		<result property="menuState" column="menu_state"/>
+		<result property="menuRemark" column="menu_remark"></result>
+		<result property="topId" column="top_id"></result>
+		<result property="menuPaixu" column="menu_paixu"></result>
+	</resultMap>
+	<select id="findMenu" parameterType="java.lang.Integer" resultMap="menu">
+		select m.*
+		from role_menu_tb rm,menu_tb m
+		where rm.role_id=#{roleId} and rm.menu_id=m.menu_id
+	</select>
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="d.s.dao.RoleDao">
+	<resultMap type="d.s.domain.RoleBean" id="role">
+		<id property="roleId" column="role_id"/>
+		<result property="roleName" column="role_name"/>
+		<result property="roleState" column="role_state"/>
+		<result property="roleDescribe" column="role_describe"/>
+		<collection property="menuBean" javaType="d.s.domain.MenuBean">
+			<id property="menuId" column="menu_id"/>
+			<result property="menuName" column="menu_name"/>
+			<result property="menuUrl" column="menu_url"></result>
+			<result property="menuState" column="menu_state"/>
+			<result property="menuRemark" column="menu_remark"></result>
+			<result property="topId" column="top_id"></result>
+			<result property="menuPaixu" column="menu_paixu"></result>
+		</collection>
+	</resultMap>
+	<!-- <select id="findRole" parameterType="int" resultMap="role">
+		select *
+		from role_tb
+		where role_id=#{roleId}	
+	</select> -->
+</mapper>

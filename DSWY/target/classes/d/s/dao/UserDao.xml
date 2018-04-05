@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="d.s.dao.UserDao">
+	<sql id="my_sql">
+		select
+			user_id,user_login,user_password,user_name,user_state,user_gender,user_email,user_address,user_phone
+		from user_tb
+	</sql>
+	<resultMap type="d.s.domain.UserBean" id="user">
+		<id property="userId" column="user_id" />
+		<result property="userLogin" column="user_login" />
+		<result property="userPassword" column="user_password" />
+		<result property="userName" column="user_name" />
+		<result property="userState" column="user_state" />
+		<result property="userGender" column="user_gender" />
+		<result property="userEmail" column="user_email" />
+		<result property="userAddress" column="user_address" />
+		<result property="userPhone" column="user_phone" />
+		<collection property="roleBean" javaType="d.s.domain.RoleBean">
+			<id property="roleId" column="role_id"/>
+			<result property="roleName" column="role_name"/>
+			<result property="roleState" column="role_state"/>
+			<result property="roleDescribe" column="role_describe"/>
+		</collection>
+	</resultMap>
+	<select id="findUser" parameterType="d.s.domain.UserBean" resultMap="user">
+		select *
+		from user_tb u left join user_role_tb ur on u.user_id=ur.user_id left join role_tb r on ur.role_id=r.role_id
+		where user_login=#{userLogin} and user_password=#{userPassword}
+	</select>
+	<select id="findUserId" parameterType="int" resultMap="user">
+		<include refid="my_sql"></include>
+		where user_id=#{userId}
+	</select>
+
+</mapper>
