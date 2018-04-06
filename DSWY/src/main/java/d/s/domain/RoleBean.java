@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RoleBean {
-	private Integer roleId;
-	private String roleName;
-	private Integer roleState;
-	private String roleDescribe;
+	private Integer roleId;//角色编号
+	private String roleName;//角色名称
+	private Integer roleState;//角色状态
+	private String roleRemark;//角色分类标识
+	private String roleDescribe;//角色描述
 	private List<MenuBean> menuBean=new ArrayList<MenuBean>();
 	public Integer getRoleId() {
 		return roleId;
@@ -27,6 +28,12 @@ public class RoleBean {
 	public void setRoleState(Integer roleState) {
 		this.roleState = roleState;
 	}
+	public String getRoleRemark() {
+		return roleRemark;
+	}
+	public void setRoleRemark(String roleRemark) {
+		this.roleRemark = roleRemark;
+	}
 	public String getRoleDescribe() {
 		return roleDescribe;
 	}
@@ -41,8 +48,9 @@ public class RoleBean {
 	}
 	@Override
 	public String toString() {
-		return "RoleBean [roleId=" + roleId + ", roleName=" + roleName + ", roleState=" + roleState + ", roleDescribe="
-				+ roleDescribe + ", menuBean=" + menuBean + "]";
+		return "RoleBean [roleId=" + roleId + ", roleName=" + roleName + ", roleState=" + roleState + ", roleRemark="
+				+ roleRemark + ", roleDescribe=" + roleDescribe + ", menuBean=" + menuBean + "]";
 	}
+
 	
 }

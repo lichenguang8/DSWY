@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
  <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 
-        <title>人事档案审批</title>
+        <title>人事审批</title>
 
         <link href="../../css/mine.css" type="text/css" rel="stylesheet" />
     </head>
@@ -15,9 +15,9 @@
         </style>
         <div class="div_head">
             <span>
-                <span style="float: left;">当前位置是：人事管理-》人事档案审批管理</span>
+                <span style="float: left;">当前位置是：考试管理-》考试审批管理</span>
                 <span style="float: right; margin-right: 8px; font-weight: bold;">
-                    <a style="text-decoration: none;" href="add.html">【档案登记】</a>
+                    <a style="text-decoration: none;" href="javascript:history.back(-1)"">【审核登记】</a>
                 </span>
             </span>
         </div>
@@ -27,7 +27,7 @@
                 <form action="#" method="get">
                     姓名: 
 					<input type="text"  />
-					建档时间：
+					申请时间：
 					<input type="text" />至<input type="text"/>
                     <input value="查询" type="submit" />
 					
@@ -38,15 +38,13 @@
             <table class="table_a" border="1" width="100%">
                 <tbody><tr style="font-weight: bold;">
                         <td width="30px;"><input type="checkbox" /></td>						
-                        <td width="80px;">档案编码</td>
+                        <td width="80px;">用户编号</td>
                         <td >姓名</td>
 						<td>性别</td>
-						<td>所属部门</td>
-						<td>职位</td>
-						<td>职称</td>
-						<td>建档日期</td>
-						<td>审核状态</td>
-						<td>档案状态</td>                      
+						<td>身份证号</td>
+						<td>教练</td>
+						<td>科目状态</td>
+						<td>审核状态</td>                       
                         <td align="center" width="100px;">操作</td>
                     </tr>
 
@@ -59,8 +57,6 @@
 						<td>技术培训师</td>
 						<td>高级技术顾问</td>
 						<td>2013-10-10</td>
-						<td>待审批</td>
-						<td>试用期</td>
 						<td>
 							
 							<a href="edit.html">办理</a>
@@ -76,8 +72,6 @@
 						<td>技术培训师</td>
 						<td>高级技术顾问</td>
 						<td>2013-10-10</td>
-						<td>待审批</td>
-						<td>删除</td>
 						<td>
 							
 							<a href="edit.html">办理</a>
@@ -94,8 +88,6 @@
 						<td>技术培训师</td>
 						<td>高级技术顾问</td>
 						<td>2013-10-10</td>
-						<td>待审批</td>
-						<td>正式员工</td>
 						<td>							
 							<a href="edit.html">办理</a>
 						</td>

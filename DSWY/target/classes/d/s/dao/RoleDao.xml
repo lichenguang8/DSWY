@@ -7,6 +7,7 @@
 		<result property="roleName" column="role_name"/>
 		<result property="roleState" column="role_state"/>
 		<result property="roleDescribe" column="role_describe"/>
+		<result property="roleRemark" column="role_remark"/>
 		<collection property="menuBean" javaType="d.s.domain.MenuBean">
 			<id property="menuId" column="menu_id"/>
 			<result property="menuName" column="menu_name"/>

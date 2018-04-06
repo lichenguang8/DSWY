@@ -5,7 +5,7 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 
-        <title>薪酬标准管理</title>
+        <title>考试科目审批</title>
 
         <link href="../../css/mine.css" type="text/css" rel="stylesheet" />
     </head>
@@ -15,9 +15,9 @@
         </style>
         <div class="div_head">
             <span>
-                <span style="float: left;">当前位置是：薪酬管理-》薪酬标准管理</span>
+                <span style="float: left;">当前位置是：考试管理-》考试审批管理</span>
                 <span style="float: right; margin-right: 8px; font-weight: bold;">
-                    <a style="text-decoration: none;" href="add.html">【添加】</a>
+                    <a style="text-decoration: none;" href="add.jsp">【添加】</a>
 					<a style="text-decoration: none;" href="#">【删除】</a>
                 </span>
             </span>

@@ -1,6 +1,5 @@
 package d.s.service;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +29,10 @@ public class UserServiceImp implements UserService {
 	public UserBean findUserId(Integer userId) {
 		return userDao.findUserId(userId);
 		
+	}
+
+	public void updataUser(UserBean user) {
+		userDao.updateUser(user);
 	}
 
 	

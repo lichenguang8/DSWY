@@ -1,19 +1,25 @@
 package d.s.domain;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class UserBean {
-	private Integer userId;
-	private String userName;
-	private String userLogin;
-	private String userPassword;
-	private String userPhone;
-	private Integer userState;
-	private String userAddress;
-	private Integer userGender;
-	private String userEmail;
-	private List<RoleBean> roleBean=new ArrayList<RoleBean>();
+	private Integer userId;//用户编号
+	private String userName;//用户姓名
+	private String userLogin;//登录账号
+	private String userPassword;//登录密码
+	private String userPhone;//手机号
+	private Integer userState;//用户状态
+	private String userAddress;//家庭地址
+	private Integer userGender;//年龄
+	private String userEmail;//Email
+	private String userSex;//性别
+	private Date userData;//出生日期
+	private Integer userIdentity;//身份证号
+	private List<RoleBean> roleBean=new ArrayList<RoleBean>();//角色
+	private String userRemark;//备注
+	private String userPicture;//图片
 	public Integer getUserId() {
 		return userId;
 	}
@@ -68,19 +74,50 @@ public class UserBean {
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
-	
+	public String getUserSex() {
+		return userSex;
+	}
+	public void setUserSex(String userSex) {
+		this.userSex = userSex;
+	}
+
+	public Date getUserData() {
+		return userData;
+	}
+	public void setUserData(Date userData) {
+		this.userData = userData;
+	}
+	public Integer getUserIdentity() {
+		return userIdentity;
+	}
+	public void setUserIdentity(Integer userIdentity) {
+		this.userIdentity = userIdentity;
+	}
 	public List<RoleBean> getRoleBean() {
 		return roleBean;
 	}
 	public void setRoleBean(List<RoleBean> roleBean) {
 		this.roleBean = roleBean;
 	}
+	public String getUserRemark() {
+		return userRemark;
+	}
+	public void setUserRemark(String userRemark) {
+		this.userRemark = userRemark;
+	}
+	public String getUserPicture() {
+		return userPicture;
+	}
+	public void setUserPicture(String userPicture) {
+		this.userPicture = userPicture;
+	}
 	@Override
 	public String toString() {
 		return "UserBean [userId=" + userId + ", userName=" + userName + ", userLogin=" + userLogin + ", userPassword="
 				+ userPassword + ", userPhone=" + userPhone + ", userState=" + userState + ", userAddress="
-				+ userAddress + ", userGender=" + userGender + ", userEmail=" + userEmail + ", roleBean=" + roleBean
-				+ "]";
+				+ userAddress + ", userGender=" + userGender + ", userEmail=" + userEmail + ", userSex=" + userSex
+				+ ", userData=" + userData + ", userIdentity=" + userIdentity + ", roleBean=" + roleBean
+				+ ", userRemark=" + userRemark + ", userPicture=" + userPicture + "]";
 	}
 	
 }

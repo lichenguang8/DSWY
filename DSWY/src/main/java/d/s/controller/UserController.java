@@ -1,8 +1,12 @@
 package d.s.controller;
 
 
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,7 +14,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import d.s.domain.MenuBean;
@@ -108,6 +115,27 @@ public class UserController {
 		ModelAndView model=new ModelAndView("redirect:../html/login.jsp");
 		HttpSession session=request.getSession();
 		session.removeAttribute("user");
+		return model;
+	}
+	/*-----------------------------修改个人信息-------------------------------------*/
+	@RequestMapping("updateUser.do")
+	public ModelAndView updateUser(HttpServletRequest re,UserBean user,@RequestParam("file")MultipartFile mf){
+		ModelAndView model=new ModelAndView();
+		if (mf.getOriginalFilename()!=null||!"".equals(mf.getOriginalFilename())) {
+			String savePath="F:/test/"+mf.getOriginalFilename();
+			try {
+				InputStream in= mf.getInputStream();
+				OutputStream out=new FileOutputStream(savePath);
+				FileCopyUtils.copy(in, out);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			user.setUserPicture(savePath);
+		}
+		userService.updataUser(user);
+		HttpSession session=re.getSession();
+		session.setAttribute("user", user);
+		model.setViewName("redirect:../html/right.jsp");
 		return model;
 	}
 	

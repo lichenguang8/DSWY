@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+  
  <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -12,7 +13,51 @@
     <base href="<%=basePath%>">
         <meta http-equiv=content-type content="text/html; charset=utf-8" />
         <link href="css/admin.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="js/jquery.js"></script>
     </head>
+   <script language="javascript">
+
+     var t = null;
+
+    t = setTimeout(time,1000);//开始执行
+
+    function time()
+
+    {
+
+       clearTimeout(t);//清除定时器
+
+       dt = new Date();
+
+var y=dt.getYear()+1900;
+
+var mm=dt.getMonth()+1;
+
+var d=dt.getDate();
+
+var weekday=["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
+
+var day=dt.getDay();
+
+       	var h=dt.getHours();
+
+       	var m=dt.getMinutes();
+
+       	var s=dt.getSeconds();
+
+if(h<10){h="0"+h;}
+
+if(m<10){m="0"+m;}
+
+if(s<10){s="0"+s;}
+
+       	document.getElementById("timeShow").innerHTML =  "当前时间："+y+"年"+mm+"月"+d+"日"+weekday[day]+"  "+h+":"+m+":"+s+"";
+
+       	t = setTimeout(time,1000); //设定定时器，循环执行           
+
+    }
+
+  </script>
     <body>
         <table cellspacing=0 cellpadding=0 width="100%" align=center border=0>
             <tr height=28>
@@ -31,7 +76,7 @@
                     <table height=100 cellspacing=0 cellpadding=0 width="100%" border=0>
 
                         <tr>
-                         <td>当前时间：2008-12-27 17:03:55</td>
+                         <td><div id="timeShow" class="time1"></div></td>
 						</tr>
                         <tr>
                             <td style="font-weight: bold; font-size: 16px">admin</td>
@@ -54,13 +99,13 @@
         <table cellspacing=0 cellpadding=2 width="95%" align=center border=0>
             <tr>
                 <td align=right width=100>登陆帐号：</td>
-                <td style="color: #880000">admin</td></tr>
+                <td style="color: #880000">"${user.userLogin }"</td></tr>
             <tr>
                 <td align=right>真实姓名：</td>
-                <td style="color: #880000">admin</td></tr>
+                <td style="color: #880000">"${user.userName }"</td></tr>
             <tr>
-                <td align=right>注册时间：</td>
-                <td style="color: #880000">2007-7-25 15:02:04</td></tr>
+                <td align=right>年龄：</td>
+                <td style="color: #880000">"${user.userGender}"</td></tr>
             <tr>
                 <td align=right>登陆次数：</td>
                 <td style="color: #880000">58</td></tr>
@@ -71,13 +116,9 @@
                 <td align=right>ip地址：</td>
                 <td style="color: #880000">222.240.172.117</td></tr>
             <tr>
-                <td align=right>身份过期：</td>
-                <td style="color: #880000">30 分钟</td>
+                <td align=right>身份证：</td>
+                <td style="color: #880000">"${user.userIdentity}"</td>
 			</tr>
         </table>		
-<!-- <div style="text-align:center;">
-<p>维护信息：<a href="http://www.zparkedu.com" target="_blank">薪火华扬（北京）科技有限公司</a></p>
-<p>联系电话：<a href="http://www.zparkedu.com" target="_blank">17710208155</a></p>
-</div> -->
     </body>
 </html>

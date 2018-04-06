@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,9 +16,9 @@
         </style>
         <div class="div_head">
             <span>
-                <span style="float: left;">当前位置是：人事管理-》人事档案管理</span>
+                <span style="float: left;">当前位置是：考试管理-》考试科目管理</span>
                 <span style="float: right; margin-right: 8px; font-weight: bold;">
-                    <a style="text-decoration: none;" href="add.html">【档案登记】</a>
+                    <a style="text-decoration: none;" href="add.jsp">【申请登记】</a>
                 </span>
             </span>
         </div>
@@ -46,7 +47,7 @@
 						<option>已删除</option>
 						<option>实习员工</option>
 					</select>
-					建档时间：
+					用户编号：
 					<input type="text" />至<input type="text"/>
                     <input value="查询" type="submit" />
 					
@@ -57,15 +58,15 @@
             <table class="table_a" border="1" width="100%">
                 <tbody><tr style="font-weight: bold;">
                         <td width="30px;"><input type="checkbox" /></td>						
-                        <td width="80px;">档案编码</td>
+                        <td width="80px;">用户编号</td>
                         <td >姓名</td>
 						<td>性别</td>
-						<td>所属部门</td>
-						<td>职位</td>
-						<td>职称</td>
-						<td>建档日期</td>
-						<td>审核状态</td>
-						<td>档案状态</td>                      
+						<td>身份证号</td>
+						<td>教练</td>
+						<td>预约日期</td>
+						<td>申请日期</td>
+						<td>科目状态</td>
+						<td>审核状态</td>                      
                         <td align="center" width="100px;">操作</td>
                     </tr>
 

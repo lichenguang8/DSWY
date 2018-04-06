@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MenuBean {
-	private Integer menuId;
-	private String menuName;
-	private String menuUrl;
-	private Integer menuState;
-	private Integer topId;
-	private String menuRemark;
-	private Integer menuPaixu;
+	private Integer menuId;//菜单编号
+	private String menuName;//菜单名称
+	private String menuUrl;//菜单URL
+	private Integer menuState;//菜单状态
+	private Integer topId;//菜单父ID
+	private String menuRemark;//菜单描述
+	private Integer menuPaixu;//菜单排序
 	private List<MenuBean> menuList=new ArrayList<MenuBean>();
 	public Integer getMenuId() {
 		return menuId;

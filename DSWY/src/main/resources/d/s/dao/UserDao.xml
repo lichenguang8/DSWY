@@ -4,7 +4,7 @@
 <mapper namespace="d.s.dao.UserDao">
 	<sql id="my_sql">
 		select
-			user_id,user_login,user_password,user_name,user_state,user_gender,user_email,user_address,user_phone
+			user_id,user_login,user_password,user_name,user_state,user_gender,user_email,user_address,user_phone,user_sex,user_data,user_identity,user_remark,user_picture
 		from user_tb
 	</sql>
 	<resultMap type="d.s.domain.UserBean" id="user">
@@ -17,6 +17,11 @@
 		<result property="userEmail" column="user_email" />
 		<result property="userAddress" column="user_address" />
 		<result property="userPhone" column="user_phone" />
+		<result property="userSex" column="user_sex"/>
+		<result property="userData" column="user_data"/>
+		<result property="userIdentity" column="user_identity"/>
+		<result property="userRemark" column="user_remark"/>
+		<result property="userPicture" column="user_picture"/>
 		<collection property="roleBean" javaType="d.s.domain.RoleBean">
 			<id property="roleId" column="role_id"/>
 			<result property="roleName" column="role_name"/>
@@ -33,5 +38,50 @@
 		<include refid="my_sql"></include>
 		where user_id=#{userId}
 	</select>
-
+	<update id="updateUser" parameterType="UserBean">
+		update user_tb
+		<set>
+			<if test="userLogin != null">
+				user_login = #{userLogin},
+			</if>
+			<if test="userName != null">
+				user_name = #{userName},
+			</if>
+			<if test="userAddress != null">
+				user_address = #{userAddress},
+			</if>
+			<if test="userPassword != null">
+				user_password = #{userPassword},
+			</if>
+			<if test="userState != null">
+				user_state= #{userState},
+			</if>
+			<if test="userGender != null">
+				user_gender = #{userGender},
+			</if>
+			<if test="userIdentity!= null">
+				user_identity = #{userIdentity},
+			</if>
+			<if test="userPhone != null">
+				user_phone = #{userPhone},
+			</if>
+			<if test="userSex != null">
+				user_sex = #{userSex},
+			</if>
+			<if test="userData != null">
+				user_data = #{userData},
+			</if>
+			<if test="userEmail != null">
+				user_email = #{userEmail},
+			</if>
+			<if test="userPicture != null">
+				user_picture = #{userPicture},
+			</if>
+			<if test="userRemark != null">
+				user_remark = #{userRemark},
+			</if>
+			
+		</set>
+		where user_id = #{userId}
+	</update>
 </mapper>
