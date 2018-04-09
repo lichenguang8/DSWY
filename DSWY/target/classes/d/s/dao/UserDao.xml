@@ -34,9 +34,10 @@
 		from user_tb u left join user_role_tb ur on u.user_id=ur.user_id left join role_tb r on ur.role_id=r.role_id
 		where user_login=#{userLogin} and user_password=#{userPassword}
 	</select>
-	<select id="findUserId" parameterType="int" resultMap="user">
-		<include refid="my_sql"></include>
-		where user_id=#{userId}
+	<select id="findUserId" parameterType="UserBean" resultMap="user">
+		select *
+		from user_tb u left join user_role_tb ur on u.user_id=ur.user_id left join role_tb r on ur.role_id=r.role_id
+		where u.user_id=#{userId}
 	</select>
 	<update id="updateUser" parameterType="UserBean">
 		update user_tb
@@ -84,4 +85,36 @@
 		</set>
 		where user_id = #{userId}
 	</update>
+	<select id="oldPasswrod" parameterType="UserBean"   resultMap="user">
+		<include refid="my_sql" />
+		where user_id=#{userId} and  user_password=#{userPassword}
+	</select>
+	<select id="listUser" parameterType="java.util.Map" resultMap="user">
+		select u.*,r.*
+		from user_tb u left join user_role_tb ur on u.user_id=ur.user_id left join role_tb r on ur.role_id=r.role_id
+		where 1=1
+		<if test="userName!=null and userName !=''">
+			and u.user_name like "%"#{userName}"%"
+		</if>
+		<if test="roleName!=null and roleName !=''">
+			and r.role_name like "%"#{roleName}"%"
+		</if>
+	</select>
+		
+	
+	<!-- <select id="max" parameterType="UserBean" resultType="int">
+		select
+		count(*) from
+		user_tb u,role_tb r
+		<where>
+		u.role_id=r.role_id 
+			<if test="userName != null and userName !=''">
+			and u.user_name like "%"#{userName}"%"
+			</if>
+			<if test="roleId != null">
+			and  u.role_id = #{roleId}
+			</if>
+		</where>
+	</select> -->
+	
 </mapper>

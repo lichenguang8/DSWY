@@ -1,6 +1,9 @@
 package d.s.service;
 
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,14 +29,28 @@ public class UserServiceImp implements UserService {
 		return userDao.findUser(user);
 	}
 
-	public UserBean findUserId(Integer userId) {
-		return userDao.findUserId(userId);
+	public UserBean findUserId(UserBean user) {
+		return userDao.findUserId(user);
 		
 	}
 
-	public void updataUser(UserBean user) {
+	public void updateUser(UserBean user) {
 		userDao.updateUser(user);
 	}
 
+	public UserBean oldPasswrod(UserBean user) {
+		
+		return userDao.oldPasswrod(user);
+	}
+
+	public List<UserBean> listUser(Map<String,Object> map) {
+		List<UserBean> userBean=userDao.listUser(map);
+		return userBean;
+	}
+
+	public Integer max(UserBean userBean) {
+		
+		return userDao.max(userBean);
+	}
 	
 }

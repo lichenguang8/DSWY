@@ -25,7 +25,7 @@
 				</td>
                 <td style="font-weight: bold; color: #fff; padding-top: 20px" 
                     >当前用户：${user.userName} &nbsp;&nbsp; 
-					<a style="color: #fff"  href="../user/userId.do?userId=${user.userId}"  target=main>刷新</a> 
+					<a style="color: #fff"  href="../user/user.do?userBean=${user}"  target=main>刷新</a> 
 					&nbsp;&nbsp; 
 					<a style="color: #fff"  href="../user/out.do" target=_top>退出系统</a> 
 														<!-- onclick="if (confirm('确定要退出吗？')) return true; else return false;"  -->

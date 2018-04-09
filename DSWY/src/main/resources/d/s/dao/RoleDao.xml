@@ -18,9 +18,9 @@
 			<result property="menuPaixu" column="menu_paixu"></result>
 		</collection>
 	</resultMap>
-	<!-- <select id="findRole" parameterType="int" resultMap="role">
+	<select id="listRole" resultMap="role">
 		select *
 		from role_tb
-		where role_id=#{roleId}	
-	</select> -->
+	</select>
+	
 </mapper>

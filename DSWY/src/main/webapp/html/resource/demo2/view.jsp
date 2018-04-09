@@ -1,18 +1,28 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+   <%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/html/";
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-    <head>
-        <title>薪酬标准管理</title>
+ <head>
+ <base href="<%=basePath%>">
+        <title>用户管理</title>
         <meta http-equiv="content-type" content="text/html;charset=utf-8">
-        <link href="../../css/mine.css" type="text/css" rel="stylesheet">
+        <link href="css/mine.css" type="text/css" rel="stylesheet">
     </head>
 
     <body>
 
         <div class="div_head">
             <span>
-                <span style="float:left">当前位置是：-》薪酬标准管理</span>
+                <span style="float: left;">当前位置是：系统管理-》用户管理</span>
                 <span style="float:right;margin-right: 8px;font-weight: bold">
-                    <a style="text-decoration: none" href="list.html">【返回】</a>
+                    <a style="text-decoration: none" href="../user/selectUser.do">【返回】</a>
                 </span>
             </span>
         </div>
@@ -24,49 +34,45 @@
                 <tr>
                     <td width="120px;">用户编号：</td>
                     <td>
-						201501010
+						${user.userId}
 					</td>
                 </tr>
 				<tr>
                     <td width="120px;">登录账号：</td>
                     <td>
-						zhangsan
+						${user.userLogin}
 					</td>
                 </tr>
                 <tr>
                     <td>用户姓名：</td>
                     <td>
-						张三
+						${user.userName}
 					</td>
                 </tr>
                 <tr>
                     <td>密码：</td>
                      <td>
-						......
+						${user.userPassword}
 					</td>
                 </tr>
                 <tr>
                     <td>用户角色：</td>
-                     <td>
-						人事部负责人
-					</td>
-                </tr>
-                <tr>
-                    <td>所属部门：</td>
-                     <td>
-						人事部
-					</td>
+                     
+					<c:forEach items="${user.roleBean}" var="role">
+                        <td>${role.roleName}</td> 
+                      </c:forEach>
+
                 </tr>
 				<tr>
                     <td>身份证：</td>
                     <td>
-                        372902198708084567
+                        ${user.userIdentity}
                     </td>                
                 </tr>
                 <tr>
                     <td>联系电话：</td>
                      <td>
-						17718181920
+						${user.userPhone}
 					</td>
                 </tr>
 
@@ -74,14 +80,14 @@
 				<tr>
                     <td>邮箱：</td>
                      <td>
-						AAA@163.com
+						${user.userEmail}
 					</td>               
                 </tr>
 
 				<tr>
                     <td>联系地址：</td>
                      <td>
-						海淀区软件园孵化器
+						${user.userAddress}
 					</td>                
                 </tr>
 
