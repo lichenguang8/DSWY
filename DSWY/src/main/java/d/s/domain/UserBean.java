@@ -16,10 +16,11 @@ public class UserBean {
 	private String userEmail;//Email
 	private String userSex;//性别
 	private Date userData;//出生日期
-	private Integer userIdentity;//身份证号
+	private String userIdentity;//身份证号
 	private List<RoleBean> roleBean=new ArrayList<RoleBean>();//角色
 	private String userRemark;//备注
 	private String userPicture;//图片
+	private Integer currentNum=1;
 	public Integer getUserId() {
 		return userId;
 	}
@@ -87,10 +88,10 @@ public class UserBean {
 	public void setUserData(Date userData) {
 		this.userData = userData;
 	}
-	public Integer getUserIdentity() {
+	public String getUserIdentity() {
 		return userIdentity;
 	}
-	public void setUserIdentity(Integer userIdentity) {
+	public void setUserIdentity(String userIdentity) {
 		this.userIdentity = userIdentity;
 	}
 	public List<RoleBean> getRoleBean() {
@@ -111,13 +112,20 @@ public class UserBean {
 	public void setUserPicture(String userPicture) {
 		this.userPicture = userPicture;
 	}
+	
+	public Integer getCurrentNum() {
+		return currentNum;
+	}
+	public void setCurrentNum(Integer currentNum) {
+		this.currentNum = currentNum;
+	}
 	@Override
 	public String toString() {
 		return "UserBean [userId=" + userId + ", userName=" + userName + ", userLogin=" + userLogin + ", userPassword="
 				+ userPassword + ", userPhone=" + userPhone + ", userState=" + userState + ", userAddress="
 				+ userAddress + ", userGender=" + userGender + ", userEmail=" + userEmail + ", userSex=" + userSex
 				+ ", userData=" + userData + ", userIdentity=" + userIdentity + ", roleBean=" + roleBean
-				+ ", userRemark=" + userRemark + ", userPicture=" + userPicture + "]";
+				+ ", userRemark=" + userRemark + ", userPicture=" + userPicture + ", currentNum=" + currentNum + "]";
 	}
 	
 }

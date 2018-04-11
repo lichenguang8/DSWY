@@ -1,7 +1,17 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+   <%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/html/";
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
-        <title>职位管理</title>
+    <base href="<%=basePath%>">
+        <title>角色管理</title>
         <meta http-equiv="content-type" content="text/html;charset=utf-8">
         <link href="../../css/mine.css" type="text/css" rel="stylesheet">
     </head>
@@ -10,9 +20,9 @@
 
         <div class="div_head">
             <span>
-                <span style="float:left">当前位置是：-》职位管理</span>
+                <span style="float:left">当前位置是：-》角色管理</span>
                 <span style="float:right;margin-right: 8px;font-weight: bold">
-                    <a style="text-decoration: none" href="list.html">【返回】</a>
+                    <a style="text-decoration: none" href="../role/selectRole.do">【返回】</a>
                 </span>
             </span>
         </div>
@@ -22,39 +32,33 @@
             <form action="./admin.php?c=goods&a=add" method="post" enctype="multipart/form-data">
             <table border="1" width="100%" class="table_a">
                 <tr>
-                    <td width="120px;">职位编码：</td>
+                    <td width="120px;">角色编码：</td>
                     <td>
-					QMXC-001002
+					${role.roleId }
 					</td>
                 </tr>
                 <tr>
-                    <td>职位名称：</td>
+                    <td>角色名称：</td>
                     <td>
-						人事总监
+						${role.roleName}
+					</td>
+                </tr>    
+                <tr>
+                    <td>角色描述：</td>
+                     <td>
+						${role.roleDescribe }
 					</td>
                 </tr>
-                <tr>
-                    <td>职位分类：</td>
+                 <tr>
+                    <td>备  注：</td>
                      <td>
-						管理
-					</td>
-                </tr>
-                <tr>
-                    <td>所属部门：</td>
-                     <td>
-						人事部
-					</td>
-                </tr>
-                <tr>
-                    <td>职位描述：</td>
-                     <td>
-						职位描述。。。
+						${role.roleDescribe }
 					</td>
                 </tr>
                 <tr>
                     <td>备  注：</td>
                      <td>
-						备注。。。
+						${role.roleRemark }
 					</td>
                 </tr>
 
@@ -62,7 +66,7 @@
 				<tr>
                     <td>是否启用：</td>
                      <td>
-						12000 元
+						${role.roleState }
 					</td>               
                 </tr>
 

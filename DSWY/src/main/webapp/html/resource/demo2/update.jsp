@@ -19,7 +19,7 @@
     </head>
     <script type="text/javascript">
     
-    	function add(){
+    	function update(){
     		var user=$("#userId").val();
     		console.log(userId);
     		var alls = document.getElementsByName("roleId");
@@ -55,55 +55,55 @@
         <div></div>
 
         <div style="font-size: 13px;margin: 10px 5px">
-            <form action="../user/insertUser.do" id=form method="post" enctype="multipart/form-data">
+            <form action="../user/update.do" id=form method="post" enctype="multipart/form-data">
             <table border="1" width="100%" class="table_a">
                 <tr>
                     <td width="120px;">用户编号<span style="color:red">*</span>：</td>
-                    <td><input type="text" name="userId" value="" id="userId"/></td>
+                    <td><input type="text" name="userId" value="${user.userId}" id="userId" readonly="readonly"/></td>
                 </tr>
                 <tr>
                     <td>登录账号<span style="color:red">*</span>：</td>
                     <td>
-                       <input type="text" name="userLogin" value="" /> 
+                       <input type="text" name="userLogin" readonly="readonly" value="${user.userLogin }" /> 
                     </td>
                 </tr>
                
                 <tr>
                     <td>用户姓名<span style="color:red">*</span>：</td>
                     <td>
-						<input type="text" name="userName" value="" /></td>
+						<input type="text" name="userName" readonly="readonly" value="${user.userName }" /></td>
                 </tr>
                 <tr>
                     <td>密码<span style="color:red">*</span>：</td>
                     <td>
-						<input type="text"  name="userPassword" value="" />
+						<input type="text"  name="userPassword" readonly="readonly" value="${user.userPassword }" />
 					</td>
                 </tr>
 				<tr>
                     <td>身份证<span style="color:red">*</span>：</td>
                     <td>
-                        <input type="text" name="userIdentity" value="" />
+                        <input type="text" name="userIdentity" readonly="readonly" value="${user.userIdentity }" />
                     </td>                
                 </tr>
 
 				<tr>
                     <td>联系电话<span style="color:red">*</span>：</td>
                     <td>
-                        <input type="text" name="userPhone" value=""/>
+                        <input type="text" name="userPhone" readonly="readonly" value="${user.userPhone}"/>
                     </td>                
                 </tr>
 
 				<tr>
                     <td>邮箱<span style="color:red">*</span>：</td>
                     <td>
-                        <input type="text" name="userEmail" value="" />
+                        <input type="text" name="userEmail" readonly="readonly" value="${user.userEmail}" />
                     </td>                
                 </tr>
 
 				<tr>
                     <td>联系地址：</td>
                     <td>
-                        <input type="text" name="userAddress" value="" />
+                        <input type="text" name="userAddress"  readonly="readonly" value="${user.userAddress}" />
                     </td>                
                 </tr>
                 <tr>
@@ -116,8 +116,7 @@
                 </tr>
                 <tr>
                     <td colspan="2" align="center">
-                        <button  onclick="add()">添加</button>
-						<input type="reset" value="清空">
+                        <button  onclick="update()">修改</button>
                     </td>
                 </tr>  
             </table>

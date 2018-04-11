@@ -25,51 +25,34 @@
     </head>
     
     <script type="text/javascript">
-    	function selectrole(obj){
+  //分页函数
+    //pageNum:最大页数
+    //maxSize：最大条数
+    //currentPage ：当前多少页
+    function nextpage(obj){
+    		//alert(obj);
+    		//var select1 = parseInt(document.getElementById("select1").value);
+    		var currentNum = parseInt(document.getElementById("currentNum").value);
     		
-    		$.post("../role/ajaxRole.do",{deptId:obj},function(result){
-    			 var role = document.getElementById("roleId"); 
-    			 role.innerHTML="";
-    			 role.add(new Option("--请选择--",-1),null);
-    			
-    			for ( var sss in result) {
-					
-    			 role.add(new Option(result[sss].roleName,result[sss].roleId),null);
-				}
-    			
-    			
-    		
-    		});
-    		
-    	}
-    	//分页函数
-    	//pageNum:最大页数
-    	//maxSize：最大条数
-    	//currentPage ：当前多少页
-    	function nextpage(obj){
-    			//alert(obj);
-    			//var select1 = parseInt(document.getElementById("select1").value);
-    			var currentNum = parseInt(document.getElementById("currentNum").value);
-    			
-    			if(obj=="forhead"){
-    				currentNum = currentNum-1;
-    			}
-    			else if(obj=="next"){
-    				currentNum = currentNum+1;
-    			}
-    			else if(obj=="first"){
-    				currentNum =1;
-    			}
-    			else if(obj=="last"){
-    				currentNum=parseInt("${pageNum}");
-    			}
-    			else {
-    				currentNum=obj;
-    			}
-    			//alert(currentNum);
-    			
-    			location.href="../user/selectUser.do?userName=${userName}&deptId=${deptId}&roleId=${roleId}&currentNum="+currentNum;
+    		if(obj=="forhead"){
+    			currentNum = currentNum-1;
     		}
+    		else if(obj=="next"){
+    			currentNum = currentNum+1;
+    		}
+    		else if(obj=="first"){
+    			currentNum =1;
+    		}
+    		else if(obj=="last"){
+    			currentNum=parseInt("${pageNum}");
+    		}
+    		else {
+    			currentNum=obj;
+    		}
+    		
+    		location.href="../user/selectUser.do?userName=${userName}&userIdentity=${userIdentity}&currentNum="+currentNum;
+    	}
+    			
     	function checkall() {
     		var alls = document.getElementsByName("check");
     		var ch = document.getElementById("checkall");
@@ -88,14 +71,13 @@
     		var ids = new Array();
     		for ( var i = 0; i < alls.length; i++) {
     			if (alls[i].checked) {
-    				ids.push(alls[i].value);
+    				ids.push("ids=" + alls[i].value);
     			}
     		}
+    		var params = ids.join("&");
     		if (ids.length > 0) {
     			if (confirm("确认操作?")) {
-    				window.location.href = "../user/deleteUserAll.do?ids="
-    						+ ids;
-
+    				window.location.href = "../user/deleteUserAll.do?"+params;
     			}
     		} else {
     			alert("请选中要操作的项");
@@ -106,13 +88,13 @@
     		var ids = new Array();
     		for ( var i = 0; i < alls.length; i++) {
     			if (alls[i].checked) {
-    				ids.push(alls[i].value);
+    				ids.push("ids=" + alls[i].value);
     			}
     		}
+    		var params = ids.join("&");
     		if (ids.length > 0) {
     			if (confirm("确认导出?")) {
-    				window.location.href = "../user/excl.do?ids="
-    						+ ids;
+    				window.location.href = "../user/excl.do?"+params;
     			}
     		} else {
     			alert("请选中要导出的项");
@@ -128,7 +110,7 @@
             <span>
                 <span style="float: left;">当前位置是：系统管理-》用户管理</span>
                 <span style="float: right; margin-right: 8px; font-weight: bold;">
-                    <a style="text-decoration: none;" href="/resource/demo2/add.jsp">【添加】</a>
+                    <a style="text-decoration: none;" href="../user/addUser.do">【添加】</a>
 					<a style="text-decoration: none;" onClick="delAll()">【删除】</a>
 					<a style="text-decoration: none;" onClick="excl()">【excl】</a>
                 </span>
@@ -148,15 +130,9 @@
                  <input type="hidden"  name="currentNum"   value="1" >
                
                   	   姓名：
-					<input type="text" id=userName  name="userName" value="${userName }" />
-					 角色: 
-					  
-                        <select name="roleName" id="roleName" >                    
-                        		<option value="">--请选择--</option>                    	
-							<c:forEach items="${roles}" var="role">
-								<option value="${role.roleId}">${role.roleName}</option>
-							</c:forEach>
-						</select>         
+					<input type="text" id=userName  name="userName" value="${userName}" />
+					   身份证：
+					<input type="text" id=userIdentity  name="userIdentity" value="${userIdentity}" />
                     <input value="查询" type="submit" />
                 </form>
            
@@ -165,8 +141,8 @@
             <table class="table_a" border="1" width="100%">
                 <tbody>
 					<tr style="font-weight: bold;">						
-                        <td width="40px;">序号</td>
-                        <td width="30px;"><input type="checkbox" /></td>						
+             
+                        <td width="30px;"><input type="checkbox" onChange="checkall()" id="checkall"/></td>						
 						<td width="80px;">账号</td>
                         <td width="80px;">姓名</td>
                         <td >角色</td>
@@ -175,24 +151,142 @@
                     </tr>
                    <c:forEach items="${userBeans}" var="item">
                    		<tr id="product1">
-                        <td>1</td>
-                        <td><input type="checkbox" /></td>
-						<td>"${item.userLogin}"</td>
-                        <td><a href="../user/getById.do?userId=${item.userId}">"${item.userName}"</a></td> 
+                
+                        <td><input type="checkbox" name="check" value="${item.userId}"/></td>
+						<td>${item.userLogin}</td>
+                        <td><a href="../user/getById.do?userId=${item.userId}">${item.userName}</a></td> 
                         <c:forEach items="${item.roleBean}" var="role">
-                        <td>"${role.roleName}"</td> 
+                        <td>${role.roleName}</td> 
                         </c:forEach>
-						<td>"${item.userState}"</td> 						                        
+						<td>
+						<c:choose>
+							<c:when test="${item.userState eq 1 }">启用</c:when>
+							<c:otherwise>禁用</c:otherwise>
+						</c:choose>
+						</td> 						                        
                         <td>
-							<a href="add.html">修改</a>						   
-							<a href="#">删除</a>
+							<a href="../user/addUser.do?type=update&userId=${item.userId }">修改</a>						   
+                        <c:choose>
+						<c:when test="${item.userState eq 1 }">
+							<a href="../user/noDeleteUser.do?userId=${item.userId }">禁用</a>
+						</c:when>
+						<c:otherwise>
+							<a href="../user/yesDeleteUser.do?userId=${item.userId }">启用</a>
+							<a href="../user/deleteUser.do?userId=${item.userId }" onclick="return confirm('确认删除？')">删除</a>
+						</c:otherwise>
+						</c:choose>
 						</td>                        
                     </tr> 
                    </c:forEach>
-                    <tr>
-                        <td colspan="20" style="text-align: center;">						
-						<a style="text-decoration: none;" href="#">
-                            首页 上一页  ... 7 8 9 10 11 12 ... 下一页 尾页 共1234条 每页显示 10/23 </a>
+     <tr>
+                       
+
+      				<td colspan="20" style="text-align: center;">
+                        					
+						${maxSize } 条记录 ${currentPage }/${pageNum } 页  
+         <a href='javascript:nextpage("first");'>首页</a>
+         <c:if test="${currentPage gt 1 }"><a href='javascript:nextpage("forhead");'>上一页</a></c:if>
+         <c:if test="${currentPage le 1 }"><a style="color:gray;">上一页</a></c:if>
+         <c:choose>
+         	<c:when test="${currentPage le 3 }">
+         		<c:if test="${currentPage eq 1 }">
+         			<span class='current'>${currentPage }</span>
+         			<c:if test="${pageNum ge 5 }">
+         				<c:forEach begin="${currentPage+1 }" end="${currentPage+4 }" var="i">
+         				<a href='javascript:nextpage(${i});'>${i }</a>
+         				</c:forEach>
+         			</c:if>
+         			<c:if test="${pageNum lt 5 }">
+         				<c:forEach begin="${currentPage+1 }" end="${pageNum }" var="i">
+         					<a href='javascript:nextpage(${i});'>${i }</a>
+         				</c:forEach>
+         			</c:if>
+         		</c:if>
+         		<c:if test="${currentPage eq 2 }">
+         			<c:if test="${pageNum ge 5 }">
+         				<c:forEach begin="${currentPage-1 }" end="${currentPage+3 }" var="i">
+         					<c:if test="${i eq currentPage }">
+         						<span class='current'>${currentPage }</span>
+         					</c:if>
+         					<c:if test="${i ne currentPage }">
+         						<a href='javascript:nextpage(${i});'>${i }</a>
+         					</c:if>
+         				</c:forEach>
+         			</c:if>
+         			<c:if test="${pageNum lt 5 }">
+         				<c:forEach begin="${currentPage-1 }" end="${pageNum }" var="i">
+         					<c:if test="${i eq currentPage }">
+         						<span class='current'>${currentPage }</span>
+         					</c:if>
+         					<c:if test="${i ne currentPage }">
+         						<a href='javascript:nextpage(${i});'>${i }</a>
+         					</c:if>
+         				</c:forEach>
+         			</c:if>
+         		</c:if>
+         		<c:if test="${currentPage eq 3 }">
+         			<c:if test="${pageNum ge 5 }">
+         				<c:forEach begin="${currentPage-2 }" end="${currentPage+2 }" var="i">
+         					<c:if test="${i eq currentPage }">
+         						<span class='current'>${currentPage }</span>
+         					</c:if>
+         					<c:if test="${i ne currentPage }">
+         						<a href='javascript:nextpage(${i});'>${i }</a>
+         					</c:if>
+         				</c:forEach>
+         			</c:if>
+         			<c:if test="${pageNum lt 5 }">
+         				<c:forEach begin="${currentPage-2 }" end="${pageNum }" var="i">
+         					<c:if test="${i eq currentPage }">
+         						<span class='current'>${currentPage }</span>
+         					</c:if>
+         					<c:if test="${i ne currentPage }">
+         						<a href='javascript:nextpage(${i});'>${i }</a>
+         					</c:if>
+         				</c:forEach>
+         			</c:if>
+         		</c:if>
+         	</c:when>
+         	<c:otherwise>
+         		<c:if test="${currentPage lt pageNum-2 }">
+         			<c:forEach begin="${currentPage-2 }" end="${currentPage+2 }" var="i">
+         				<c:if test="${i eq currentPage }">
+         					<span class='current'>${currentPage }</span>
+         				</c:if>
+         				<c:if test="${i ne currentPage }">
+         					<a href='javascript:nextpage(${i});'>${i }</a>
+         				</c:if>
+         			</c:forEach>
+         		</c:if>
+         		<c:if test="${currentPage ge pageNum-2 }">
+         			<c:if test="${pageNum ge 5 }">
+         				<c:forEach begin="${pageNum-4 }" end="${pageNum }" var="i">
+         				<c:if test="${i eq currentPage }">
+         					<span class='current'>${currentPage }</span>
+         				</c:if>
+         				<c:if test="${i ne currentPage }">
+         					<a href='javascript:nextpage(${i});'>${i }</a>
+         				</c:if>
+         			</c:forEach>
+         			</c:if>
+         			<c:if test="${pageNum lt 5 }">
+         			<c:forEach begin="${pageNum-3 }" end="${pageNum }" var="i">
+         				<c:if test="${i eq currentPage }">
+         					<span class='current'>${currentPage }</span>
+         				</c:if>
+         				<c:if test="${i ne currentPage }">
+         					<a href='javascript:nextpage(${i});'>${i }</a>
+         				</c:if>
+         			</c:forEach>
+         			</c:if>	
+         		</c:if>
+         	</c:otherwise>
+         </c:choose> 
+         <c:if test="${currentPage lt pageNum }"><a href='javascript:nextpage("next");'>下一页</a></c:if>
+         <c:if test="${currentPage ge pageNum }"><a style="color:gray;">下一页</a></c:if> 
+         <a href='javascript:nextpage("last");' >尾页</a>
+         
+         
                         </td>
                     </tr>
                 </tbody>

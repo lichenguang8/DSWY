@@ -21,14 +21,44 @@ public class RoleServiceImp implements RoleService {
 	public void setRoleDao(RoleDao roleDao) {
 		this.roleDao = roleDao;
 	}
+	
 
-	public RoleBean findRole(Integer roleId) {
-		return roleDao.findRole(roleId);
+	public List<RoleBean> findRole(RoleBean role) {
+		role.setCurrentNum((role.getCurrentNum()-1)*8);
+		List<RoleBean> list=roleDao.findRole(role);
+		role.setCurrentNum(role.getCurrentNum()/8+1);
+		return list;
 	}
 
 	public List<RoleBean> listRole() {
-		
+	
 		return roleDao.listRole();
+		
+	}
+
+	public RoleBean getRoleId(Integer roleId) {
+		
+		return roleDao.getRoleId(roleId);
+	}
+
+	public void deleteRole(Integer roleId) {
+		roleDao.deleteRole(roleId);
+		
+	}
+
+	public void updateRole(RoleBean roleBean) {
+		roleDao.updateRole(roleBean);
+		
+	}
+
+	public void insertRole(RoleBean roleBean) {
+		roleDao.insertRole(roleBean);
+		
+	}
+
+	public Integer max(RoleBean roleBean) {
+		
+		return roleDao.max(roleBean);
 	}
 
 }

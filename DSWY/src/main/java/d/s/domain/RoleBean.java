@@ -7,9 +7,10 @@ public class RoleBean {
 	private Integer roleId;//角色编号
 	private String roleName;//角色名称
 	private Integer roleState;//角色状态
-	private String roleRemark;//角色分类标识
+	private String roleRemark;//角色备注
 	private String roleDescribe;//角色描述
 	private List<MenuBean> menuBean=new ArrayList<MenuBean>();
+	private Integer currentNum=1;
 	public Integer getRoleId() {
 		return roleId;
 	}
@@ -46,11 +47,21 @@ public class RoleBean {
 	public void setMenuBean(List<MenuBean> menuBean) {
 		this.menuBean = menuBean;
 	}
+	
+	public Integer getCurrentNum() {
+		return currentNum;
+	}
+	public void setCurrentNum(Integer currentNum) {
+		this.currentNum = currentNum;
+	}
 	@Override
 	public String toString() {
 		return "RoleBean [roleId=" + roleId + ", roleName=" + roleName + ", roleState=" + roleState + ", roleRemark="
-				+ roleRemark + ", roleDescribe=" + roleDescribe + ", menuBean=" + menuBean + "]";
+				+ roleRemark + ", roleDescribe=" + roleDescribe + ", menuBean=" + menuBean + ", currentNum="
+				+ currentNum + "]";
 	}
-
+	
+	
+	
 	
 }

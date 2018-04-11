@@ -12,6 +12,7 @@ public class MenuBean {
 	private String menuRemark;//菜单描述
 	private Integer menuPaixu;//菜单排序
 	private List<MenuBean> menuList=new ArrayList<MenuBean>();
+	private Integer currentNum=1;
 	public Integer getMenuId() {
 		return menuId;
 	}
@@ -60,11 +61,18 @@ public class MenuBean {
 	public void setMenuList(List<MenuBean> menuList) {
 		this.menuList = menuList;
 	}
+	
+	public Integer getCurrentNum() {
+		return currentNum;
+	}
+	public void setCurrentNum(Integer currentNum) {
+		this.currentNum = currentNum;
+	}
 	@Override
 	public String toString() {
 		return "MenuBean [menuId=" + menuId + ", menuName=" + menuName + ", menuUrl=" + menuUrl + ", menuState="
 				+ menuState + ", topId=" + topId + ", menuRemark=" + menuRemark + ", menuPaixu=" + menuPaixu
-				+ ", menuList=" + menuList + "]";
+				+ ", menuList=" + menuList + ", currentNum=" + currentNum + "]";
 	}
 	
 	
