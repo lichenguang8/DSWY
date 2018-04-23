@@ -1,16 +1,24 @@
 package d.s.domain;
 
-import java.util.Date;
+
 
 //车辆
 public class VehicleBean {
 	private Integer vehicleId;//车辆编号
 	private String vehicleName;//车辆名称
-	private String vehicleStyle;//车辆类型
+	private Integer vehicleStyle;//车辆类型
 	private String vehicleNumber;//发动机号
-	private Date vehicleBdata;//购买时间
-	private Date vehicleAdata;//分配日期
-	private String vehicleState;//车辆状态
+	private String vehicleBdata;//购买时间
+	private Integer vehicleState;//车辆状态
+	private String vehicleDec;//车辆备注
+	private Integer currentNum=1;
+	
+	public Integer getCurrentNum() {
+		return currentNum;
+	}
+	public void setCurrentNum(Integer currentNum) {
+		this.currentNum = currentNum;
+	}
 	public Integer getVehicleId() {
 		return vehicleId;
 	}
@@ -23,10 +31,10 @@ public class VehicleBean {
 	public void setVehicleName(String vehicleName) {
 		this.vehicleName = vehicleName;
 	}
-	public String getVehicleStyle() {
+	public Integer getVehicleStyle() {
 		return vehicleStyle;
 	}
-	public void setVehicleStyle(String vehicleStyle) {
+	public void setVehicleStyle(Integer vehicleStyle) {
 		this.vehicleStyle = vehicleStyle;
 	}
 	public String getVehicleNumber() {
@@ -37,28 +45,31 @@ public class VehicleBean {
 	}
 	
 	
-	public Date getVehicleBdata() {
+	public String getVehicleBdata() {
 		return vehicleBdata;
 	}
-	public void setVehicleBdata(Date vehicleBdata) {
+	public void setVehicleBdata(String vehicleBdata) {
 		this.vehicleBdata = vehicleBdata;
 	}
-	public Date getVehicleAdata() {
-		return vehicleAdata;
-	}
-	public void setVehicleAdata(Date vehicleAdata) {
-		this.vehicleAdata = vehicleAdata;
-	}
-	public String getVehicleState() {
+	public Integer getVehicleState() {
 		return vehicleState;
 	}
-	public void setVehicleState(String vehicleState) {
+	public void setVehicleState(Integer vehicleState) {
 		this.vehicleState = vehicleState;
+	}
+	
+	public String getVehicleDec() {
+		return vehicleDec;
+	}
+	public void setVehicleDec(String vehicleDec) {
+		this.vehicleDec = vehicleDec;
 	}
 	@Override
 	public String toString() {
 		return "VehicleBean [vehicleId=" + vehicleId + ", vehicleName=" + vehicleName + ", vehicleStyle=" + vehicleStyle
-				+ ", vehicleNumber=" + vehicleNumber + ", vehicleState=" + vehicleState + "]";
+				+ ", vehicleNumber=" + vehicleNumber + ", vehicleBdata=" + vehicleBdata + ", vehicleState="
+				+ vehicleState + ", vehicleDec=" + vehicleDec + ", currentNum=" + currentNum + "]";
 	}
+	
 	
 }

@@ -17,7 +17,7 @@ public interface UserService {
 	public UserBean getUserById(Integer userId);
 	public void deleteUser(Integer userId);
 	public Integer max(UserBean userBean);
-	
+	public List<UserBean> list();
 	
 	public void insertUserR(List<UserRoleBean> ur);//用户添加
 	public void update(Integer userId);

@@ -81,5 +81,10 @@ public class UserServiceImp implements UserService {
 		
 	}
 
+	public List<UserBean> list() {
+		
+		return userDao.list();
+	}
+
 	
 }

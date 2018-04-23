@@ -1,124 +1,92 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+   <%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/html/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
  <head>
-        <title>薪酬标准管理</title>
+ 		<base href="<%=basePath%>">
+        <title>车辆信息管理查看修改</title>
         <meta http-equiv="content-type" content="text/html;charset=utf-8">
-        <link href="../css/mine.css" type="text/css" rel="stylesheet">
-    </head>
-
+        <link href="css/mine.css" type="text/css" rel="stylesheet">
+        <script src="js/jquery-3.2.1.min.js" type="text/javascript"
+	charset="utf-8"></script>
+        <script language="javascript" type="text/javascript" src="<%=basePath%>My97DatePicker/WdatePicker.js"></script>
+ </head>
     <body>
 
         <div class="div_head">
             <span>
-                <span style="float:left">当前位置是：-》薪酬标准管理</span>
+                <span style="float:left">当前位置是：-》车辆信息管理》查看修改</span>
                 <span style="float:right;margin-right: 8px;font-weight: bold">
-                    <a style="text-decoration: none" href="list_standard.html">【返回】</a>
+                    <a style="text-decoration: none" href="../vehicle/selectAll.do">【返回】</a>
                 </span>
             </span>
         </div>
         <div></div>
 
         <div style="font-size: 13px;margin: 10px 5px">
-            <form action="./admin.php?c=goods&a=add" method="post" enctype="multipart/form-data">
+            <form action="../vehicle/update.do" method="post" enctype="multipart/form-data">
             <table border="1" width="100%" class="table_a">
                 <tr>
-                    <td width="120px;">薪酬标准编号：</td>
+                    <td width="120px;">车辆编号<span style="color:red">*</span>：</td>
+                    <td><input type="text" name="vehicleId"  readonly value="${vehicle.vehicleId}"/></td>
+                </tr>
+                <tr>
+                    <td width="120px;">车辆名称<span style="color:red">*</span>：</td>
+                    <td><input type="text" name="vehicleName" value="${vehicle.vehicleName }"/></td>
+                </tr>
+                <tr>
+                    <td>车辆分类<span style="color:red">*</span>：</td>
                     <td>
-						a1001
+                       <select name="vehicleStyle">
+						<option value="0" <c:if test="${vehicle.vehicleStyle eq 0}">selected="selected"</c:if>>-- 请选择--</option>
+						<option value="1" <c:if test="${vehicle.vehicleStyle eq 1}">selected="selected"</c:if>>--客车--</option>
+						<option value="2" <c:if test="${vehicle.vehicleStyle eq 2}">selected="selected"</c:if>>--货车--</option>
+						<option value="3" <c:if test="${vehicle.vehicleStyle eq 3}">selected="selected"</c:if>>--汽车--</option>
+						</select>
+                    </td>
+                </tr>
+               
+                <tr>
+                    <td>发动机号<span style="color:red">*</span>：</td>
+                    <td>
+						<input type="text" name="vehicleNumber" value="${vehicle.vehicleNumber}"/>
 					</td>
                 </tr>
                 <tr>
-                    <td>薪酬标准名称：</td>
+                    <td>购买时间<span style="color:red">*</span>：</td>
                     <td>
-						高级开发工程师
+						<input type="text" name="vehicleBdata"  value="${vehicle.vehicleBdata }" onclick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd'})"/>
 					</td>
                 </tr>
-                <tr>
-                    <td>薪酬总额：</td>
-                     <td>
-						15000 元
-					</td>
-                </tr>
-                <tr>
-                    <td>制定人：</td>
-                     <td>
-						张XX
-					</td>
-                </tr>
-                <tr>
-                    <td>登记人：</td>
-                     <td>
-						张XX
-					</td>
-                </tr>
-                <tr>
-                    <td>登记时间：</td>
-                     <td>
-						2015-10-29
-					</td>
-                </tr>
-
-
 				<tr>
-                    <td>基本工资：</td>
-                     <td>
-						12000 元
-					</td>               
-                </tr>
-
-				<tr>
-                    <td>绩效奖金：</td>
-                     <td>
-						1000 元
-					</td>                
-                </tr>
-
-				<tr>
-                    <td>交通补助：</td>
+                    <td>车辆状态<span style="color:red">*</span>：</td>
                     <td>
-                        100 元
+                        <select name="vehicleState"> 
+						<option value="0" <c:if test="${vehicle.vehicleState eq 0}">selected="selected"</c:if>>-- 请选择--</option>
+						<option value="1" <c:if test="${vehicle.vehicleState eq 1}">selected="selected"</c:if>>正常使用</option>
+						<option value="2" <c:if test="${vehicle.vehicleState eq 2}">selected="selected"</c:if>>修理</option>
+						<option value="3" <c:if test="${vehicle.vehicleState eq 3}">selected="selected"</c:if>>已报废</option>
+						</select>
                     </td>                
                 </tr>
-
-				<tr>
-                    <td>通讯补助：</td>
-                    <td>
-                       100 元
-                    </td>                
-                </tr>
-
-				<tr>
-                    <td>餐补：</td>
-                    <td>
-                        350 元
-                    </td>                
-                </tr>
-				<tr>
-                    <td>住房补助：</td>
-                    <td>
-                       300 元
-                    </td>                
-                </tr>
-				<tr>
-                    <td>出差补助：</td>
-                    <td> 
-                       1000 元
-                    </td>                
-                </tr>
-				<tr>
-                    <td>加班补助：</td>
-                    <td>
-                        150 元
-                    </td>                
-                </tr>	
 				<tr>
                     <td>备注：</td>
                     <td>
-                       基本工资+补助
+                        <input type="text" name="vehicleDec" value="${vehicle.vehicleDec}"/>
                     </td>                
                 </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" value="修改">
+                    </td>
+                </tr>  
             </table>
             </form>
         </div>

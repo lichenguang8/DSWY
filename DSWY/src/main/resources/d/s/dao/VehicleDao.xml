@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="d.s.dao.VehicleDao">
+	<resultMap type="d.s.domain.VehicleBean" id="vehicle">
+		<id property="vehicleId" column="vehicle_id"/>
+		<result property="vehicleName" column="vehicle_name"/>
+		<result property="vehicleStyle" column="vehicle_style"/>
+		<result property="vehicleNumber" column="vehicle_number"></result>
+		<result property="vehicleBdata" column="vehicle_bdata"/>
+		<result property="vehicleDec" column="vehicle_dec"/>
+		<result property="vehicleState" column="vehicle_state"></result>
+		
+	</resultMap>
+	<select id="selectAll" parameterType="VehicleBean" resultMap="vehicle">
+		select * from vehicle_tb
+		where 1=1
+			<if test="vehicleName!=null and vehicleName!=''">
+				and vehicle_name like "%"#{vehicleName}"%"
+			</if>
+			<if test="vehicleStyle!=null and vehicleStyle!=''">
+				and vehicle_style=#{vehicleStyle}
+			</if>
+		order by vehicle_id
+			limit #{currentNum},8
+	</select>
+	<insert id="insert">
+		insert into vehicle_tb
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="vehicleId!=null">
+				vehicle_id,
+			</if>
+			<if test="vehicleName!=null">
+				vehicle_name,
+			</if>
+			<if test="vehicleStyle!=null">
+				vehicle_style,
+			</if>
+			<if test="vehicleNumber!=null">
+				vehicle_number,
+			</if>
+			<if test="vehicleBdata!=null">
+				vehicle_bdata,
+			</if>
+			<if test="vehicleDec!=null">
+				vehicle_dec,
+			</if>
+			<if test="vehicleState!=null">
+				vehicle_state,
+			</if>
+		</trim>
+		<trim	prefix="values(" suffix=")" suffixOverrides=",">
+			<if test="vehicleId!=null">
+				#{vehicleId},
+			</if>
+			<if test="vehicleName!=null">
+				#{vehicleName},
+			</if>
+			<if test="vehicleStyle!=null">
+				#{vehicleStyle},
+			</if>
+			<if test="vehicleNumber!=null">
+				#{vehicleNumber},
+			</if>
+			<if test="vehicleBdata!=null">
+				#{vehicleBdata},
+			</if>
+			<if test="vehicleDec!=null">
+				#{vehicleDec},
+			</if>
+			<if test="vehicleState!=null">
+				#{vehicleState},
+			</if>
+		</trim>
+	</insert>
+	<delete id="delete" parameterType="int">
+		delete from vehicle_tb
+		where vehicle_id=#{vehicleId}
+	</delete>
+	<select id="view" parameterType="int" resultMap="vehicle">
+		select * from vehicle_tb
+		where vehicle_id=#{vehicleId}
+	</select>
+	<update id="update" parameterType="VehicleBean">
+		update vehicle_tb
+		<set>
+			<if test="vehicleName!=null">
+				vehicle_name=#{vehicleName},
+			</if>
+			<if test="vehicleStyle!=null">
+				vehicle_style=#{vehicleStyle},
+			</if>
+			<if test="vehicleNumber!=null">
+				vehicle_number=#{vehicleNumber},
+			</if>
+			<if test="vehicleBdata!=null">
+				vehicle_bdata=#{vehicleBdata},
+			</if>
+			<if test="vehicleDec!=null">
+				vehicle_dec=#{vehicleDec},
+			</if>
+			<if test="vehicleState!=null">
+				vehicle_state=#{vehicleState},
+			</if>
+		</set>
+		where vehicle_id=#{vehicleId}
+	</update>
+	<select id="max" parameterType="VehicleBean" resultType="int">
+		select count(*) from vehicle_tb
+		<where>
+			<if test="vehicleName!=null and vehicleName!=''">
+				and vehicle_name like "%"#{vehicleName}"%"
+			</if>
+			<if test="vehicleStyle!=null and vehicleStyle!=''">
+				and vehicle_style=#{vehicleStyle}
+			</if>
+		</where>
+	</select>
+</mapper>

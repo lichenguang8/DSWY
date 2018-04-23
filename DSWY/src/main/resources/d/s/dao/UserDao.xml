@@ -29,6 +29,9 @@
 			<result property="roleDescribe" column="role_describe"/>
 		</collection>
 	</resultMap>
+	<select id="list" resultMap="user">
+		<include refid="my_sql"></include>
+	</select>
 	<select id="findUser" parameterType="d.s.domain.UserBean" resultMap="user">
 		select *
 		from user_tb u left join user_role_tb ur on u.user_id=ur.user_id left join role_tb r on ur.role_id=r.role_id
@@ -91,16 +94,15 @@
 	</select>
 	<select id="listUser" parameterType="UserBean" resultMap="user">
 		select u.*,r.*
-		from user_tb u left join user_role_tb ur on u.user_id=ur.user_id left join role_tb r on ur.role_id=r.role_id
+		from user_tb u left join user_role_tb us on u.user_id=us.user_id left join role_tb r on us.role_id=r.role_id
 		where 1=1
 		<if test="userName!=null and userName !=''">
 			and u.user_name like "%"#{userName}"%"
 		</if>
-		<if test="userIdentity!=null and userIdentity !=''">
+		<if test="userIdentity !=null and userIdentity !=''">
 			and u.user_identity like "%"#{userIdentity}"%"
 		</if>
-		ORDER BY u.user_id DESC	
-		limit #{currentNum},8
+		ORDER BY u.user_id DESC limit #{currentNum},8 
 	</select>
 	<insert id="insertUser" parameterType="UserBean">
 		insert into user_tb 
@@ -197,7 +199,7 @@
 			and u.user_name like "%"#{userName}"%"
 			</if>
 			<if test="userIdentity != null">
-			and  u.user_Identity = #{userIdentity}
+			and  u.user_identity like "%"#{userIdentity}"%"
 			</if>
 		</where>
 	</select>

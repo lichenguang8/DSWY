@@ -150,14 +150,16 @@
                         <td align="center" width="100px;">操作</td>
                     </tr>
                    <c:forEach items="${userBeans}" var="item">
-                   		<tr id="product1">
-                
+                   	<tr id="product1">
                         <td><input type="checkbox" name="check" value="${item.userId}"/></td>
 						<td>${item.userLogin}</td>
                         <td><a href="../user/getById.do?userId=${item.userId}">${item.userName}</a></td> 
-                        <c:forEach items="${item.roleBean}" var="role">
-                        <td>${role.roleName}</td> 
-                        </c:forEach>
+                        <td>
+                        	<c:forEach items="${item.roleBean}" var="role">
+                        		${role.roleName}
+                        	</c:forEach>
+                        </td>
+	                 
 						<td>
 						<c:choose>
 							<c:when test="${item.userState eq 1 }">启用</c:when>
@@ -178,7 +180,8 @@
 						</td>                        
                     </tr> 
                    </c:forEach>
-     <tr>
+  			 
+                                <tr>
                        
 
       				<td colspan="20" style="text-align: center;">

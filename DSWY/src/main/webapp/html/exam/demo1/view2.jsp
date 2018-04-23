@@ -22,7 +22,7 @@
             <span>
                 <span style="float:left">当前位置是：-》考试管理 -》科目考试管理</span>
                 <span style="float:right;margin-right: 8px;font-weight: bold">
-                    <a style="text-decoration: none" href="../exam/selectAll.do">【返回】</a>
+                    <a style="text-decoration: none" href="../exam/selectAll2.do">【返回】</a>
                 </span>
             </span>
         </div>

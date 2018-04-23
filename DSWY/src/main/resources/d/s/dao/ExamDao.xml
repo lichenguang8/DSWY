@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="d.s.dao.ExamDao">
+	<resultMap type="d.s.domain.ExamBean" id="exam">
+		<id property="examId" column="exam_id"/>
+		<result property="examName" column="exam_name"/>
+		<result property="examNumber" column="exam_number"/>
+		<result property="examState" column="exam_state"></result>
+		<result property="examHstate" column="exam_hstate"/>
+		<result property="examSubdata" column="exam_subdata"/>
+		<result property="examAppdata" column="exam_appdata"></result>
+		<result property="examDescribe" column="exam_describe"></result>
+		<result property="userId" column="user_id"/>
+	</resultMap>
+	<select id="selectAll" parameterType="Map" resultMap="exam">
+	select e.*
+	from exam_tb e,user_tb u
+	<where>
+		e.user_id=u.user_id
+		<if test="examState!=null and examState!=''">
+			and e.exam_state=#{examState}
+		</if>
+		<if test="datestart !=null and dateend !=null ">	
+			and date(e.exam_subdata) between date(#{datestart,jdbcType=TIMESTAMP}) and  date(#{dateend,jdbcType=TIMESTAMP})	
+		</if> 
+		<if test="examName!=null and examName!=''">
+			and e.exam_name like "%"#{examName}"%"
+		</if>
+		order by e.exam_id 
+		limit #{start},#{pageRows}	
+	</where>	
+	</select>
+	<insert id="insertAll"	parameterType="ExamBean">
+		insert into exam_tb 
+		<trim	prefix="(" suffix=")" suffixOverrides=",">
+			<if test="examId!=null">
+			exam_id,
+			</if>
+				
+			<if test="examName != null">
+			exam_name,
+			</if>
+			<if test="examState != null">
+			exam_state,
+			</if>
+			<if test="examHstate != null">
+			exam_hstate,
+			</if>
+			<if test="examNumber != null">
+			exam_number,
+			</if>
+			<if test="examSubdata != null">
+			exam_subdata,
+			</if>
+			<if test="examAppdata != null">
+			exam_appdata,
+			</if>
+			<if test="examDescribe != null">
+			exam_describe,
+			</if>
+			<if test="userId != null">
+			user_id,
+			</if>
+		</trim>
+		<trim	prefix="values(" suffix=")" suffixOverrides=",">
+			<if test="examId!=null">
+			#{examId},			
+			</if>
+			<if test="examName != null">
+			#{examName},
+			</if>
+			<if test="examState != null">
+			#{examState},
+			</if>
+			<if test="examHstate != null">
+			#{examHstate},
+			</if>
+			<if test="examNumber != null">
+			#{examNumber},
+			</if>
+			<if test="examSubdata != null">
+			#{examSubdata},
+			</if>
+			<if test="examAppdata != null">
+			#{examAppdata},
+			</if>
+			<if test="examDescribe != null">
+			#{examDescribe},
+			</if>
+			<if test="userId != null">
+			#{userId},
+			</if>
+		</trim>
+	</insert>
+	<select id="select" parameterType="int" resultMap="exam">
+		select *
+		from exam_tb
+		where exam_id=#{examId}		
+	</select>
+	
+	<delete id="examDel" parameterType="int">
+		delete from exam_tb where exam_id=#{examId}
+	</delete>
+	<select id="max" parameterType="map" resultType="long">
+	select count(*) as totleRows
+	from exam_tb e,user_tb u
+	<where>
+		e.user_id=u.user_id
+		<if test="examState!=null and examState!=''">
+			and e.exam_state=#{examState}
+		</if>
+		<if test="datestart !=null and dateend !=null ">	
+			and date(e.exam_subdata) between date(#{datestart,jdbcType=TIMESTAMP}) and  date(#{dateend,jdbcType=TIMESTAMP})	
+		</if> 
+		<if test="examName!=null and examName!=''">
+			and e.exam_name like "%"#{examName}"%"
+		</if>
+	</where>	
+	
+	</select>
+	
+	<select id="selectAll2" parameterType="Map" resultMap="exam">
+	select e.*
+	from exam_tb e,user_tb u
+	<where>
+		e.user_id=u.user_id
+		<if test="examId!=null">
+			and e.exam_id=#{examId}
+		</if>
+		<if test="datestart !=null and dateend !=null ">	
+			and date(e.exam_appdata) between date(#{datestart,jdbcType=TIMESTAMP}) and  date(#{dateend,jdbcType=TIMESTAMP})	
+		</if> 
+		and e.exam_hstate=2
+		order by e.exam_id 
+		limit #{start},#{pageRows}	
+	</where>	
+	</select>
+	<select id="max2" parameterType="map" resultType="long">
+	select count(*) as totleRows
+	from exam_tb e,user_tb u
+	<where>
+		e.user_id=u.user_id
+		<if test="examId!=null">
+			and e.exam_id=#{examId}
+		</if>
+		<if test="datestart !=null and dateend !=null ">	
+			and date(e.exam_appdata) between date(#{datestart,jdbcType=TIMESTAMP}) and  date(#{dateend,jdbcType=TIMESTAMP})	
+		</if> 
+		and e.exam_hstate=2
+	</where>	
+	</select>
+	
+	<update id="update" parameterType="ExamBean">
+		update exam_tb
+		<set>
+			<if test="examName != null">
+				exam_name = #{examName},
+			</if>
+			<if test="examState != null">
+			exam_state=#{examState},
+			</if>
+			<if test="examHstate != null">
+			exam_hstate=#{examHstate},
+			</if>
+			<if test="examNumber != null">
+			exam_number=#{examNumber},
+			</if>
+			<if test="examSubdata != null">
+			exam_subdata=#{examSubdata},
+			</if>
+			<if test="examAppdata != null">
+			exam_appdata=#{examAppdata},
+			</if>
+			<if test="examDescribe != null">
+			exam_describe=#{examDescribe},
+			</if>
+			<if test="userId != null">
+			user_id=#{userId},
+			</if>
+		</set>
+		where exam_id = #{examId}
+	</update>
+</mapper>

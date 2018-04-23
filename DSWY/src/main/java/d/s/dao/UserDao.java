@@ -2,7 +2,7 @@ package d.s.dao;
 
 
 import java.util.List;
-import java.util.Map;
+
 
 import d.s.domain.UserBean;
 import d.s.domain.UserRoleBean;
@@ -18,7 +18,7 @@ public interface UserDao {
 	public void deleteUser(Integer userId);
 	public Integer max(UserBean userBean);
 	
-	
+	public List<UserBean> list();
 	public void insertUserR(List<UserRoleBean> ur);//用户添加
 	public void update(Integer userId);
 }
